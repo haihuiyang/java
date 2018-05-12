@@ -5,9 +5,9 @@ import com.yhh.common.PrintUtils;
 import lombok.Data;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -19,18 +19,18 @@ import static com.yhh.common.PrintUtils.println;
 @Data
 public class MyOwnCrawler {
 
-    private final static String DEFAULT_CHARSET = "UTF-8";
-    private final HttpClient httpClient;
+    private static final String DEFAULT_CHARSET = "UTF-8";
+    private final HttpClientBuilder httpClientBuilder;
     private String charset;
 
     public MyOwnCrawler() {
         this.charset = DEFAULT_CHARSET;
-        httpClient = HttpClientBuilder.create().build();
+        httpClientBuilder = HttpClientBuilder.create();
     }
 
     public MyOwnCrawler(String charset) {
         this.charset = charset;
-        httpClient = HttpClientBuilder.create().build();
+        httpClientBuilder = HttpClientBuilder.create();
     }
 
     public static void main(String[] args) {
@@ -53,15 +53,17 @@ public class MyOwnCrawler {
 
         HttpGet httpGet = new HttpGet(url);
 
+        CloseableHttpClient closeableHttpClient = httpClientBuilder.build();
+
         try {
-            responseBody = httpClient.execute(httpGet, responseHandler);
+            responseBody = closeableHttpClient.execute(httpGet, responseHandler);
             println("----------------------------------------");
             println(responseBody);
             println("----------------------------------------");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            httpClient.getConnectionManager().shutdown();
+            closeableHttpClient.getConnectionManager().shutdown();
         }
         return responseBody;
     }
