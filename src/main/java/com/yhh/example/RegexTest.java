@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
 public class RegexTest {
 
 
-    private static String digitWithAlphabetRegexStr = "[1-9a-zA-Z]+";
+    private static String DIGIT_WITH_ALPHABET_REGEX_STR = "[1-9a-zA-Z]+";
     private Pattern pattern;
 
     @Before
     public void init() {
-        pattern = Pattern.compile(digitWithAlphabetRegexStr);
+        pattern = Pattern.compile(DIGIT_WITH_ALPHABET_REGEX_STR);
     }
 
     @Test

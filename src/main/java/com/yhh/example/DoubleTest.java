@@ -1,6 +1,7 @@
 package com.yhh.example;
 
 import com.yhh.common.PrintUtils;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.text.DecimalFormat;
@@ -21,5 +22,18 @@ public class DoubleTest {
             0.0000012000
             0.000001
          */
+    }
+
+    @Test
+    public void testIntToLong() throws Exception {
+        long l = 10l;
+
+        Integer i = Math.toIntExact(l);
+    }
+
+    @Test
+    public void testIntegerEqual() throws Exception {
+        Integer i = 10;
+        Assert.assertTrue(i.equals(10));
     }
 }

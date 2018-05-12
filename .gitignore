@@ -12,6 +12,12 @@ out/
 # maven
 target/
 
+# gradle
+out/
+build/
+.gradle/
+gradle/
+
 # eclipse
 .classpath
 .project

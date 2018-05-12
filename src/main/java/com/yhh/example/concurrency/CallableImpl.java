@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 public class CallableImpl implements Callable {
 
-    @Override
     public String call() throws Exception {
         String threadName = Thread.currentThread().getName();
         TimeUnit.SECONDS.sleep(1);

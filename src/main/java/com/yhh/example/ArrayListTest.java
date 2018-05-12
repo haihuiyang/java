@@ -1,5 +1,6 @@
 package com.yhh.example;
 
+import com.google.common.collect.Lists;
 import com.yhh.common.PrintUtils;
 import org.junit.Test;
 
@@ -10,12 +11,12 @@ import java.util.List;
 public class ArrayListTest {
 
     @Test
-    public void testArraysAsList() throws Exception {
-        List<String> notFixedList = new ArrayList<>(Arrays.asList("aaa", "bbb", "ccc"));
+    public void testArraysAsList() {
+        List<String> notFixedList = Lists.newArrayList(Arrays.asList("aaa", "bbb", "ccc"));
 
         notFixedList.add(null);
         notFixedList.add("ddd");
-        notFixedList.stream().forEach(a -> System.out.println(a));
+        notFixedList.forEach(System.out::println);
 
         List<String> fixedList = Arrays.asList("aaa", "bbb", "ccc");
         fixedList.add("ddd");
@@ -36,7 +37,7 @@ public class ArrayListTest {
         /*
         直接使用Arrays.asList("aaa", "bbb", "ccc")得到的List的size是固定的，不能对其做add和remove操作（会抛出java.lang.UnsupportedOperationException异常）。
         其根本原因是Arrays.asList()调用的是Arrays里面的一个内部类，不是java.util.ArrayList，这个内部类是不能进行add和remove操作的。
-        如果相对返回的list做增删操作，正确的做法是new ArrayList<>(Arrays.asList("aaa", "bbb", "ccc"));
+        如果相对返回的list做增删操作，正确的做法是Lists.newArrayList(Arrays.asList("aaa", "bbb", "ccc"));
          */
     }
 
@@ -48,7 +49,7 @@ public class ArrayListTest {
             add("c");
             add("d");
         }};
-        stringList.forEach(s -> PrintUtils.println(s));
+        stringList.forEach(PrintUtils::println);
         /*
         result:
             a
@@ -59,7 +60,7 @@ public class ArrayListTest {
     }
 
     @Test
-    public void testAddNull() throws Exception {
+    public void testAddNull() {
         List<String> testList = new ArrayList<String>() {{
             add("aa");
             add("bb");
@@ -67,7 +68,7 @@ public class ArrayListTest {
         }};
 
         testList.add(null);
-        testList.forEach(elem -> PrintUtils.println(elem));
+        testList.forEach(PrintUtils::println);
 
         /*
         result:
