@@ -1,5 +1,5 @@
 package com.yhh.example.classloading;
 
-public interface InterfactTest {
+public interface InterfaceTest {
     String name = "sdf";
 }

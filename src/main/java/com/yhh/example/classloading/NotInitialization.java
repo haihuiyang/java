@@ -9,7 +9,7 @@ public class NotInitialization {
 
         System.out.println(ConstClass.HELLO_WORLD);//引用常量池的变量不会触发定义常量的类的初始化
 
-        System.out.println(InterfactTest.name);//接口的成员变量是 'static final' 的
+        System.out.println(InterfaceTest.name);//接口的成员变量是 'static final' 的
 
     }
 }
