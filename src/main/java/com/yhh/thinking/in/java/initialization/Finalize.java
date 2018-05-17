@@ -19,6 +19,12 @@ public class Finalize {
         System.out.println("second gc().");
 
         //当调用gc的时候，如果一个对象没有任何引用，则会被清理，并且会调用finalize方法
+        /*
+        output:
+            first gc().
+            second gc().
+            finalize occur.
+         */
     }
 
 }
