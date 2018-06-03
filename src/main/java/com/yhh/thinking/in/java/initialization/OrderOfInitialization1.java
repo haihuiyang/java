@@ -1,6 +1,6 @@
 package com.yhh.thinking.in.java.initialization;
 
-public class OrderOfInitialization {
+public class OrderOfInitialization1 {
 
     public static void main(String[] args) {
         House house = new House();
@@ -13,7 +13,7 @@ public class OrderOfInitialization {
             House()
             Window(33)
             f()
-         成员变量的初始化按照定义的顺序初始化，并且是在所有方法调用之前，包括构造方法
+         成员变量的初始化按照定义的顺序初始化，然后执行构造方法里面的初始化语句
          */
     }
 
