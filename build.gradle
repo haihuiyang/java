@@ -16,10 +16,14 @@ tasks.withType(JavaCompile) {
 
 repositories {
     maven { url "http://central.maven.org/maven2/" }
+    maven { url "https://maven2.pavlab.msl.ubc.ca/" }
 }
 dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
     compile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
+
+    // https://mvnrepository.com/artifact/classmexer/classmexer
+    compile group: 'classmexer', name: 'classmexer', version: '0.03'
 }
