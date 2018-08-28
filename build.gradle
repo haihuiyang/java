@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'scala'
 apply plugin: 'maven'
 
 group = 'com.yhh'
@@ -19,11 +20,47 @@ repositories {
     maven { url "https://maven2.pavlab.msl.ubc.ca/" }
 }
 dependencies {
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
-    compile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
-    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclient_version
+    compile group: 'junit', name: 'junit', version: junit_version
+    compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
+    compile group: 'com.google.guava', name: 'guava', version: guava_version
 
     // https://mvnrepository.com/artifact/classmexer/classmexer
-    compile group: 'classmexer', name: 'classmexer', version: '0.03'
+    compile group: 'classmexer', name: 'classmexer', version: classmexer_version
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jackson_version
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jackson_version
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jackson_version
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: jackson_version
+
+    compile group: 'org.scala-lang', name: 'scala-library', version: scala_version
+    testCompile(group: 'org.scalatest', name: 'scalatest_2.12', version: scalatest_version) {
+        exclude(module: 'scala-library')
+    }
+    testCompile(group: 'org.scalactic', name: 'scalactic_2.12', version: scalatest_version) {
+        exclude(module: 'scala-library')
+    }
+}
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala', 'src/main/java']
+        }
+        java {
+            srcDirs = []
+        }
+    }
+
+
+
+    test {
+        scala {
+            srcDirs = ['src/test/scala/', 'src/test/java/']
+            include '**/*Test.java'
+            include '**/*Helper.java'
+            exclude '**/*IT.java'
+            exclude '**/*Tests.java'
+        }
+    }
 }
