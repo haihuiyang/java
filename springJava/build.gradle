@@ -1,0 +1,13 @@
+dependencies {
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: spring_boot_starter_version
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version: spring_boot_starter_version) {
+        exclude(module: 'spring-boot-starter-logging')
+    }
+
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_starter_version) {
+        exclude(module: 'spring-boot-starter-logging')
+        exclude(module: 'spring-boot-starter-tomcat')
+    }
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-undertow', version: spring_boot_starter_version
+}

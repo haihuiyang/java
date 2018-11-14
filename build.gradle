@@ -30,6 +30,10 @@ allprojects {
         }
     }
 
+//    configurations {
+//        compile.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+//    }
+
     dependencies {
         compile group: 'junit', name: 'junit', version: junit_version
         compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
