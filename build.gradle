@@ -1,67 +1,71 @@
-apply plugin: 'java'
-apply plugin: 'scala'
-apply plugin: 'maven'
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'scala'
+    apply plugin: 'maven'
 
-group = 'com.yhh'
-version = '1.0-SNAPSHOT'
+    group = 'com.yhh'
+    version = '1.0-SNAPSHOT'
 
-description = """"""
+    description = "java project for study"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-
-
-
-repositories {
-    maven { url "http://central.maven.org/maven2/" }
-    maven { url "https://maven2.pavlab.msl.ubc.ca/" }
-}
-dependencies {
-
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclient_version
-    compile group: 'junit', name: 'junit', version: junit_version
-    compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
-    compile group: 'com.google.guava', name: 'guava', version: guava_version
-
-    // https://mvnrepository.com/artifact/classmexer/classmexer
-    compile group: 'classmexer', name: 'classmexer', version: classmexer_version
-
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jackson_version
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jackson_version
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jackson_version
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: jackson_version
-
-    compile group: 'org.scala-lang', name: 'scala-library', version: scala_version
-    testCompile(group: 'org.scalatest', name: 'scalatest_2.12', version: scalatest_version) {
-        exclude(module: 'scala-library')
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
     }
-    testCompile(group: 'org.scalactic', name: 'scalactic_2.12', version: scalatest_version) {
-        exclude(module: 'scala-library')
-    }
-}
 
-sourceSets {
-    main {
-        scala {
-            srcDirs = ['src/main/scala', 'src/main/java']
-        }
-        java {
-            srcDirs = []
+    repositories {
+        maven { url "http://central.maven.org/maven2/" }
+        maven { url "https://maven2.pavlab.msl.ubc.ca/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo1.maven.org/maven2" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenCentral()
+    }
+
+    idea {
+        module {
+            downloadSources = true
         }
     }
 
+    dependencies {
+        compile group: 'junit', name: 'junit', version: junit_version
+        compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
+        compile group: 'com.google.guava', name: 'guava', version: guava_version
+
+        compile group: 'org.scala-lang', name: 'scala-library', version: scala_version
+        testCompile(group: 'org.scalatest', name: 'scalatest_2.12', version: scalatest_version) {
+            exclude(module: 'scala-library')
+        }
+        testCompile(group: 'org.scalactic', name: 'scalactic_2.12', version: scalatest_version) {
+            exclude(module: 'scala-library')
+        }
+    }
+}
+
+subprojects {
+    sourceSets {
+        main {
+            scala {
+                srcDirs = ['src/main/scala', 'src/main/java']
+            }
+            java {
+                srcDirs = []
+            }
+        }
 
 
-    test {
-        scala {
-            srcDirs = ['src/test/scala/', 'src/test/java/']
-            include '**/*Test.java'
-            include '**/*Helper.java'
-            exclude '**/*IT.java'
-            exclude '**/*Tests.java'
+
+        test {
+            scala {
+                srcDirs = ['src/test/scala/', 'src/test/java/']
+                include '**/*Test.java'
+                include '**/*Helper.java'
+                exclude '**/*IT.java'
+                exclude '**/*Tests.java'
+            }
         }
     }
 }

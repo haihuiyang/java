@@ -1,0 +1,13 @@
+dependencies {
+
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclient_version
+
+    // https://mvnrepository.com/artifact/classmexer/classmexer
+    compile group: 'classmexer', name: 'classmexer', version: classmexer_version
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jackson_version
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: jackson_version
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jdk8', version: jackson_version
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: jackson_version
+
+}
