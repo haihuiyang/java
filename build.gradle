@@ -20,6 +20,7 @@ repositories {
     maven { url "https://maven2.pavlab.msl.ubc.ca/" }
 }
 dependencies {
+
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: httpclient_version
     compile group: 'junit', name: 'junit', version: junit_version
     compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
