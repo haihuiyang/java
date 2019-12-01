@@ -46,6 +46,9 @@ allprojects {
         testCompile(group: 'org.scalactic', name: 'scalactic_2.12', version: scalatest_version) {
             exclude(module: 'scala-library')
         }
+
+        testCompile group: 'org.openjdk.jmh', name: 'jmh-core', version: jmh_version
+        testCompile group: 'org.openjdk.jmh', name: 'jmh-generator-annprocess', version: jmh_version
     }
 }
 

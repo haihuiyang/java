@@ -35,7 +35,7 @@ public class LambdaTest {
 
     @Test
     public void testForeach() {
-        stringList.stream().forEach(s -> PrintUtils.println(s));
+        stringList.stream().forEach(PrintUtils::println);
 
         /*
         result:
@@ -48,7 +48,7 @@ public class LambdaTest {
 
     @Test
     public void testParallelStream() {
-        stringList.parallelStream().forEach(s -> PrintUtils.println(s));
+        stringList.parallelStream().forEach(PrintUtils::println);
         /*
         result:
             bb
@@ -78,7 +78,7 @@ public class LambdaTest {
     @Test
     public void testFilter() {
         stringList.stream().filter(s -> s.startsWith("a") || s.startsWith("b"))
-                .forEach(s -> PrintUtils.println(s));
+                .forEach(PrintUtils::println);
 
         /*
         result:
@@ -94,7 +94,7 @@ public class LambdaTest {
 
     @Test
     public void testMap() {
-        stringList.stream().map(s -> s.toUpperCase()).forEach(s -> PrintUtils.println(s));
+        stringList.stream().map(String::toUpperCase).forEach(PrintUtils::println);
 
         /*
         result:
@@ -110,11 +110,9 @@ public class LambdaTest {
     }
 
     @Test
-    public void testReduce() throws Exception {
-        Optional<Integer> sumOptional = integerList.stream().reduce((a, b) -> a + b);
-        if (sumOptional.isPresent()) {
-            PrintUtils.println(sumOptional.get());
-        }
+    public void testReduce() {
+        Optional<Integer> sumOptional = integerList.stream().reduce(Integer::sum);
+        sumOptional.ifPresent(PrintUtils::println);
 
         /*
         result:
@@ -127,8 +125,8 @@ public class LambdaTest {
     }
 
     @Test
-    public void testToMap() throws Exception {
-        Map<String, User> nameUserMap = userList.stream().collect(Collectors.toMap(user -> user.getUserName(), user -> user));
+    public void testToMap() {
+        Map<String, User> nameUserMap = userList.stream().collect(Collectors.toMap(User::getUserName, user -> user));
 
         nameUserMap.keySet().forEach(userName -> PrintUtils.println(nameUserMap.get(userName)));
 
