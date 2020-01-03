@@ -26,6 +26,15 @@ public class CasABAProblem {
 
     private volatile int value = 0;
 
+    /*
+    执行程序，结果如下：
+        2020-01-02T22:57:48.565 thread thread2 : sleep 200 millis
+        2020-01-02T22:57:48.565 thread thread1 : value is 0, and sleep 1000 millis.
+        2020-01-02T22:57:48.566 thread thread3 : cas is true, value from 0 to 100 after CAS.
+        2020-01-02T22:57:48.783 thread thread2 : cas is true, value from 100 to 0 after CAS.
+        2020-01-02T22:57:49.585 thread thread1 : cas is true, value from 0 to 50 after CAS.
+     */
+
     public static void main(String[] args) throws InterruptedException {
 
         CasABAProblem abaProblem = new CasABAProblem();
