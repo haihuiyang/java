@@ -5,51 +5,51 @@ import static com.yhh.common.PrintUtils.println;
 /**
  * @author happyfeet
  * @since Jan 13, 2020
- *
+ * <p>
  * https://leetcode.com/problems/median-of-two-sorted-arrays/
  */
 public class Solution4 {
 
     /**
      * 解题思路：
-     *
+     * <p>
      * 一、将所有元素分为 left_part 和 right_part 两部分，两边元素个数应该一样（中位数性质）
-     *
+     * <p>
      * 1、len(left_part) == len(right_part)
      * 2、max(left_part) == min(right_part)
-     *
+     * <p>
      * 假设存在 i (对应于数组 A), j (对应于数组 B)使得上式成立，则可得到：
-     *
+     * <p>
      * (1)、第一个条件
      * i + j = (m - i) + (n - j)        ==> n + m 为偶数时
      * 或者
      * i + j = (m - i) + (n - j) + 1    ==> n + m 为奇数时
-     *
+     * <p>
      * (2)、第二个条件
-     *  A(i - 1) <= B(j)
-     *  B(j - 1) <= A(i)
-     *
+     * A(i - 1) <= B(j)
+     * B(j - 1) <= A(i)
+     * <p>
      * 二、边界条件判断原理：i = 0; j = 0; i = m; j = n;
-     *
+     * <p>
      * left_part      |  right_part
      * [0 ~ (i - 1)]  |  [i ~ (m - 1)]
      * [0 ~ (j - 1)]  |  [j ~ (n - 1)]
-     *
+     * <p>
      * 当 i = 0 时，说明 [0 ~ (m - 1)] 在 right_part
      * 当 j = 0 时，说明 [0 ~ (n - 1)] 在 right_part
      * 当 i = m 时，说明 [0 ~ (m - 1)] 在 left_part
      * 当 j = n 时，说明 [0 ~ (n - 1)] 在 left_part
-     *
+     * <p>
      * 三、为什么需要 m <= n ?
-     *
+     * <p>
      * i ∈ [0, m]
      * j = (m + n) / 2 - i <= (m + n) / 2 - m = (n - m) / 2
      * 即 j <= (n - m) / 2，如果 m > n，j 可能小于 0，为了避免出现这种情况，所以 m <= n.
-     *
+     * <p>
      * 四、两个推论（可以分别少一个判断）
      * i > 0 ===> j < n
      * i < m ===> j > 0
-     *
+     * <p>
      * 前提：m <= n
      * i = (m + n) / 2 - j > 0 ==> j < (m + n) / 2 <= (n + n) / 2 = n   ==> j < n
      * j = (m + n) / 2 - i > (m + n) / 2 - m = (n - m) / 2 >= 0         ==> j > 0
