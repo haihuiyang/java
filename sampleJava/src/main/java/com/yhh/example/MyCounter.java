@@ -8,14 +8,14 @@ import sun.misc.Unsafe;
  * @since Dec 28, 2019
  */
 
-public class Counter {
+public class MyCounter {
 
     private static final Unsafe unsafe = UnsafeUtils.getUnsafe();// 这个是自己写的一个 Utils，通过反射获取 unsafe 的实例
     private static final long countOffset;
 
     static {
         try {
-            countOffset = unsafe.objectFieldOffset(Counter.class.getDeclaredField("count"));
+            countOffset = unsafe.objectFieldOffset(MyCounter.class.getDeclaredField("count"));
         } catch (Exception e) {
             throw new Error(e);
         }
@@ -25,24 +25,25 @@ public class Counter {
 
     public static void main(String[] args) {
 
-        Counter unsafeCount = new Counter();
-        Counter synchronizedCount = new Counter();
-        Counter casCount = new Counter();
+        MyCounter unsafeCount = new MyCounter();
+        MyCounter synchronizedCount = new MyCounter();
+        MyCounter casCount = new MyCounter();
 
         unsafeCount(unsafeCount);
         synchronizedCount(synchronizedCount);
         casCount(casCount);
 
-        while (Thread.activeCount() > 1) {// 注意 IntelliJ 以 run 模式跑需要指定为 2，debug 模式则指定为 1。
+        while (Thread.activeCount() > 2) {// 注意 IntelliJ 以 run 模式跑需要指定为 2，debug 模式则指定为 1。
             Thread.yield();
         }
+        unsafeCount.increment();
 
         System.out.println("unsafe count is : " + unsafeCount.getCount());
         System.out.println("synchronized count is : " + synchronizedCount.getCount());
         System.out.println("cas count is : " + casCount.getCount());
     }
 
-    private static void unsafeCount(final Counter counter) {
+    private static void unsafeCount(final MyCounter counter) {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
@@ -66,7 +67,7 @@ public class Counter {
         thread2.start();
     }
 
-    private static void synchronizedCount(final Counter counter) {
+    private static void synchronizedCount(final MyCounter counter) {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override
@@ -90,7 +91,7 @@ public class Counter {
         thread2.start();
     }
 
-    private static void casCount(final Counter counter) {
+    private static void casCount(final MyCounter counter) {
 
         Thread thread1 = new Thread(new Runnable() {
             @Override

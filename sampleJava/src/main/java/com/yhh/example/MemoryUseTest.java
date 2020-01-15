@@ -1,7 +1,7 @@
 package com.yhh.example;
 
 import com.javamex.classmexer.MemoryUtil;
-import sun.misc.Unsafe;
+import com.yhh.common.UnsafeUtils;
 
 import java.lang.reflect.Field;
 
@@ -12,22 +12,6 @@ import java.lang.reflect.Field;
  */
 public class MemoryUseTest {
 
-    private static Unsafe unsafe;
-
-    // 为了获取 field 的 offset
-    static {
-        try {
-            Field f = Unsafe.class.getDeclaredField("theUnsafe");
-            f.setAccessible(true);
-            unsafe = (Unsafe) f.get(null);
-        } catch (Exception e) {
-        }
-    }
-
-    public static Unsafe getUnsafe() {
-        return unsafe;
-    }
-
     public static void main(String[] args) {
 
         MemoryUse obj = new MemoryUse();
@@ -36,7 +20,7 @@ public class MemoryUseTest {
 
         System.out.println("obj offset is : ");
         for (Field field : obj.getClass().getDeclaredFields()) {
-            System.out.println("\t offset : " + getUnsafe().objectFieldOffset(field) + ", field name : " + field.getName());
+            System.out.println("\t offset : " + UnsafeUtils.getUnsafe().objectFieldOffset(field) + ", field name : " + field.getName());
         }
 
     }
