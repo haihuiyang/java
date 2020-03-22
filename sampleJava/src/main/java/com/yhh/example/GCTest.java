@@ -1,5 +1,9 @@
 package com.yhh.example;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class GCTest {
 
     private static final int _1MB = 1024 * 1024;
@@ -23,4 +27,16 @@ public class GCTest {
 //        System.gc();
     }
 
+    public void invoke() {
+        List<Object> test = test();
+        ref(test);
+    }
+
+    public List<Object> test() {
+        return IntStream.range(0, 100).boxed().collect(Collectors.toList());
+    }
+
+    public void ref(List<Object> objects) {
+        objects.forEach(obj -> System.out.println(obj));
+    }
 }
